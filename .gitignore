@@ -1,0 +1,10 @@
+/.idea/
+/**/Cargo.lock
+/**/target/
+/**/node_modules/
+/**/coverage/
+/**/coverage.json
+/**/migrations/coverage/
+/**/.env
+/**/cache
+/**/artifacts

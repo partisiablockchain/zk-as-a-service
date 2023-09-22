@@ -1,0 +1,47 @@
+include:
+- project: 'secata-public/pom/shared-ci'
+  file: 'rust-contract.yml'
+  ref: 'v.2.19.1'
+
+cache:
+  key: global-npm-cache
+  paths:
+  - node_modules/
+
+sol-linting:
+  image: ${CI_DEPENDENCY_PROXY_GROUP_IMAGE_PREFIX}/node:16
+  stage: test
+  script:
+    - |
+       cd "$CI_PROJECT_DIR/public-voting"
+       npx solhint --max-warnings 0 contracts/**/*.sol
+  rules:
+    - if: $CI_MERGE_REQUEST_SOURCE_BRANCH_NAME
+
+sol-build:
+  image: ${CI_DEPENDENCY_PROXY_GROUP_IMAGE_PREFIX}/node:16
+  stage: test
+  script:
+    - |
+       cd "$CI_PROJECT_DIR/public-voting"
+       npm ci
+       npx hardhat compile --network hardhat
+  artifacts:
+    paths:
+    - build
+  rules:
+  - if: $CI_MERGE_REQUEST_SOURCE_BRANCH_NAME
+
+sol-coverage:
+  image: ${CI_DEPENDENCY_PROXY_GROUP_IMAGE_PREFIX}/node:16
+  stage: test
+  script:
+    - |
+       cd "$CI_PROJECT_DIR/public-voting"
+       npm ci
+       npx hardhat coverage --network hardhat
+  artifacts:
+    paths:
+    - ./public-voting/coverage
+  rules:
+  - if: $CI_MERGE_REQUEST_SOURCE_BRANCH_NAME
