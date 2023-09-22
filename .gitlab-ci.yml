@@ -1,7 +1,7 @@
 include:
 - project: 'secata-public/pom/shared-ci'
   file: 'rust-contract.yml'
-  ref: 'v.2.19.1'
+  ref: 'v.2.21.0'
 
 cache:
   key: global-npm-cache
