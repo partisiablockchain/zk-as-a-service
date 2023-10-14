@@ -4,11 +4,6 @@ const ethers = hre.ethers;
 
 const curve = new EC("secp256k1");
 
-function computeEthereumAddress(encodedKey, encoding) {
-  let buffer = Buffer.from(encodedKey, encoding);
-  return ethers.utils.computeAddress(buffer);
-}
-
 function testKey(key) {
   console.log(`Deriving from:    ${key}`);
 
@@ -21,4 +16,4 @@ function testKey(key) {
   console.log(`Ethereum Address: ${ethers.utils.computeAddress(publicKey).substring(2)}`)
 }
 
-module.exports = {computeEthereumAddress, testKey};
+module.exports = {testKey};

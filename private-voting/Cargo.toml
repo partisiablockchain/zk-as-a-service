@@ -1,6 +1,6 @@
 [package]
 name = "private-voting"
-version = "0.10.0"
+version = "0.30.0"
 edition = "2021"
 license = "MIT"
 
