@@ -3,15 +3,20 @@
 // for the contract constructor.
 
 
-const CONTRACT_ADDRESS = process.env.ETH_CONTRACT_ADDRESS;
+const GOERLI_CONTRACT_ADDRESS = process.env.GOERLI_CONTRACT_ADDRESS;
 const PBC_CONTRACT_ADDRESS = process.env.PBC_CONTRACT_ADDRESS;
-const ZK_ENGINE_PUB_KEY_0 = process.env.ZK_ENGINE_PUB_KEY_0;
-const ZK_ENGINE_PUB_KEY_1 = process.env.ZK_ENGINE_PUB_KEY_1;
-const ZK_ENGINE_PUB_KEY_2 = process.env.ZK_ENGINE_PUB_KEY_2;
-const ZK_ENGINE_PUB_KEY_3 = process.env.ZK_ENGINE_PUB_KEY_3;
+const ZK_ENGINE_PUB_KEY_0 = process.env.ZK_NODE_PUBLIC_KEY_1;
+const ZK_ENGINE_PUB_KEY_1 = process.env.ZK_NODE_PUBLIC_KEY_2;
+const ZK_ENGINE_PUB_KEY_2 = process.env.ZK_NODE_PUBLIC_KEY_3;
+const ZK_ENGINE_PUB_KEY_3 = process.env.ZK_NODE_PUBLIC_KEY_4;
 
 const hre = require("hardhat");
-const computeEthereumAddress = require("public-voting/scripts/pbc");
+
+
+function computeEthereumAddress(encodedKey, encoding) {
+    let buffer = Buffer.from(encodedKey, encoding);
+    return ethers.utils.computeAddress(buffer);
+}
 
 async function main() {
   const nodeAddresses = [
@@ -22,7 +27,7 @@ async function main() {
   ];
 
   await hre.run("verify:verify", {
-    address: "0x" + CONTRACT_ADDRESS,
+    address: "0x" + GOERLI_CONTRACT_ADDRESS,
     constructorArguments: ["0x" + PBC_CONTRACT_ADDRESS, nodeAddresses],
   });
 }

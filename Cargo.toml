@@ -9,7 +9,7 @@ members = [
 cargo-partisia = "4.8.0"
 
 [workspace.metadata.zkcompiler]
-url = "https://gitlab.com/api/v4/groups/12499775/-/packages/maven/com/partisiablockchain/language/zkcompiler/4.17.0/zkcompiler-4.17.0-jar-with-dependencies.jar"
+url = "https://gitlab.com/api/v4/groups/12499775/-/packages/maven/com/partisiablockchain/language/zkcompiler/4.35.0/zkcompiler-4.35.0-jar-with-dependencies.jar"
 
 [workspace.dependencies]
 pbc_contract_common = { git = "https://git@gitlab.com/partisiablockchain/language/contract-sdk.git", tag = "15.1.0" }
